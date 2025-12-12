@@ -20,27 +20,31 @@ public class ArduinoSerialConnector : MonoBehaviour
 
     void Start()
     {
-        m_SerialPort.Open();
+        m_SerialPort?.Open();
         // m_SerialPort.ReadTimeout = 100;
     }
 
     void OnDisable()
     {
-        m_SerialPort.Close();
+        m_SerialPort?.Close();
     }
 
     void OnApplicationQuit()
     {
-        m_SerialPort.Close();
+        m_SerialPort?.Close();
     }
 
     public string ReadData()
     {
-        return m_SerialPort.ReadLine();
+        if (m_SerialPort != null && m_SerialPort.IsOpen)
+        {
+            return m_SerialPort.ReadLine();
+        }
+        return null;
     }
 
     public void WriteData(string data)
     {
-        m_SerialPort.WriteLine(data);
+        m_SerialPort?.WriteLine(data);
     }
 }

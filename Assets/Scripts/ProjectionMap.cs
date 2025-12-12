@@ -1,22 +1,38 @@
+using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class ProjectionMap : MonoBehaviour
 {
+    [SerializeField] GameObject m_EditableCornerPrefab;
+
     ArduinoSerialConnector m_ArduinoSerialConnector;
     MeshRenderer m_MeshRenderer;
+    MeshFilter m_MeshFilter;
+    List<EditableCorner> m_EditableCorners = new();
 
     void Start()
     {
         m_ArduinoSerialConnector = FindAnyObjectByType<ArduinoSerialConnector>();
         m_MeshRenderer = GetComponent<MeshRenderer>();
+        m_MeshFilter = GetComponent<MeshFilter>();
+
+        foreach (Vector3 vertex in m_MeshFilter.mesh.vertices)
+        {
+            EditableCorner corner = Instantiate(m_EditableCornerPrefab, transform).GetComponent<EditableCorner>();
+            corner.transform.position = vertex;
+            m_EditableCorners.Add(corner);
+        }
     }
 
     void Update()
     {
         string arduinoData = m_ArduinoSerialConnector.ReadData();
-        int data = int.Parse(arduinoData);
-
-        SetAlpha(data / 100f);
+        if (arduinoData != null)
+        {
+            int data = int.Parse(arduinoData);
+            SetAlpha(data / 100f);
+        }
     }
 
     void SetAlpha(float alpha)
