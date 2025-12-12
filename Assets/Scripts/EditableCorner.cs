@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,8 @@ public class EditableCorner : MonoBehaviour
     [SerializeField] Color m_FocusColor = Color.white;
     [SerializeField] Color m_ActiveColor = Color.red;
     [SerializeField] LayerMask m_RaycastPlane;
+
+    public event Action<EditableCorner> OnMove;
 
     Color m_OriginalColor;
     MeshRenderer m_MeshRenderer;
@@ -88,6 +91,7 @@ public class EditableCorner : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, 10, m_RaycastPlane))
             {
                 transform.position = hit.point;
+                OnMove?.Invoke(this);
             }
         }
     }

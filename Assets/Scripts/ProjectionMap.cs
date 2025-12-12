@@ -22,6 +22,7 @@ public class ProjectionMap : MonoBehaviour
             EditableCorner corner = Instantiate(m_EditableCornerPrefab, transform).GetComponent<EditableCorner>();
             corner.transform.position = vertex;
             m_EditableCorners.Add(corner);
+            corner.OnMove += OnCornerMove;
         }
     }
 
@@ -45,5 +46,13 @@ public class ProjectionMap : MonoBehaviour
     void OnDisable()
     {
         SetAlpha(1f);
+    }
+
+    void OnCornerMove(EditableCorner corner)
+    {
+        int indexOfCorner = m_EditableCorners.IndexOf(corner);
+        Vector3[] movedVertices = m_MeshFilter.mesh.vertices;
+        movedVertices[indexOfCorner] = corner.transform.position;
+        m_MeshFilter.mesh.vertices = movedVertices;
     }
 }
