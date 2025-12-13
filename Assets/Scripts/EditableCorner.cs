@@ -8,6 +8,8 @@ public class EditableCorner : MonoBehaviour
     [SerializeField] Color m_ActiveColor = new(0.2f, 0.2f, 0.2f);
     [SerializeField] LayerMask m_RaycastPlane;
 
+    public event Action<EditableCorner> OnFocus;
+    public event Action<EditableCorner> OnUnfocus;
     public event Action<EditableCorner> OnMove;
 
     Color m_OriginalColor;
@@ -45,17 +47,20 @@ public class EditableCorner : MonoBehaviour
             {
                 m_MeshRenderer.material.color = m_FocusColor;
                 m_IsFocused = true;
+                OnFocus?.Invoke(this);
             }
             else
             {
                 m_MeshRenderer.material.color = m_OriginalColor;
                 m_IsFocused = false;
+                OnUnfocus?.Invoke(this);
             }
         }
         else
         {
             m_MeshRenderer.material.color = m_OriginalColor;
             m_IsFocused = false;
+            OnUnfocus?.Invoke(this);
         }
     }
 
@@ -90,7 +95,7 @@ public class EditableCorner : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             if (Physics.Raycast(ray, out RaycastHit hit, 10, m_RaycastPlane))
             {
-                transform.position = hit.point;
+                transform.position = new Vector3(hit.point.x, hit.point.y, 0f);
                 OnMove?.Invoke(this);
             }
         }
