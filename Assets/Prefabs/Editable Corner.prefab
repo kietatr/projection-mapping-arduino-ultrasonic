@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FocusColor: {r: 1, g: 1, b: 1, a: 1}
-  m_ActiveColor: {r: 1, g: 0, b: 0, a: 1}
+  m_ActiveColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_RaycastPlane:
     serializedVersion: 2
     m_Bits: 8

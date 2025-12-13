@@ -6,15 +6,11 @@ public class ProjectionMap : MonoBehaviour
 {
     [SerializeField] GameObject m_EditableCornerPrefab;
 
-    ArduinoSerialConnector m_ArduinoSerialConnector;
-    MeshRenderer m_MeshRenderer;
     MeshFilter m_MeshFilter;
     List<EditableCorner> m_EditableCorners = new();
 
     void Start()
     {
-        m_ArduinoSerialConnector = FindAnyObjectByType<ArduinoSerialConnector>();
-        m_MeshRenderer = GetComponent<MeshRenderer>();
         m_MeshFilter = GetComponent<MeshFilter>();
 
         foreach (Vector3 vertex in m_MeshFilter.mesh.vertices)
@@ -26,33 +22,11 @@ public class ProjectionMap : MonoBehaviour
         }
     }
 
-    void Update()
+    void OnCornerMove(EditableCorner movedCorner)
     {
-        string arduinoData = m_ArduinoSerialConnector.ReadData();
-        if (arduinoData != null)
-        {
-            int data = int.Parse(arduinoData);
-            SetAlpha(data / 100f);
-        }
-    }
-
-    void SetAlpha(float alpha)
-    {
-        Color currentColor = m_MeshRenderer.sharedMaterial.color;
-        Color newColor = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
-        m_MeshRenderer.sharedMaterial.color = newColor;
-    }
-
-    void OnDisable()
-    {
-        SetAlpha(1f);
-    }
-
-    void OnCornerMove(EditableCorner corner)
-    {
-        int indexOfCorner = m_EditableCorners.IndexOf(corner);
+        int indexOfMovedCorner = m_EditableCorners.IndexOf(movedCorner);
         Vector3[] movedVertices = m_MeshFilter.mesh.vertices;
-        movedVertices[indexOfCorner] = corner.transform.position;
+        movedVertices[indexOfMovedCorner] = movedCorner.transform.position;
         m_MeshFilter.mesh.vertices = movedVertices;
     }
 }

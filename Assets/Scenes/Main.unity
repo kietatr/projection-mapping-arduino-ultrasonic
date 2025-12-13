@@ -390,6 +390,7 @@ GameObject:
   - component: {fileID: 815731425}
   - component: {fileID: 815731424}
   - component: {fileID: 815731428}
+  - component: {fileID: 815731429}
   m_Layer: 0
   m_Name: Tiger L
   m_TagString: Untagged
@@ -500,6 +501,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EditableCornerPrefab: {fileID: 4465869547551092873, guid: fe9318bc0a95de320b598a265a6377fd, type: 3}
+--- !u!114 &815731429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815731423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80530786c17173f7ea36c23c00964a26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Images:
+  - {fileID: 2800000, guid: 179f58b07b6ae76949a57ef1cc19334a, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class EditableCorner : MonoBehaviour
 {
     [SerializeField] Color m_FocusColor = Color.white;
-    [SerializeField] Color m_ActiveColor = Color.red;
+    [SerializeField] Color m_ActiveColor = new(0.2f, 0.2f, 0.2f);
     [SerializeField] LayerMask m_RaycastPlane;
 
     public event Action<EditableCorner> OnMove;
