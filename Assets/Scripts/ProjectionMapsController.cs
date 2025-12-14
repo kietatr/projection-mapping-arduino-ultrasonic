@@ -38,9 +38,12 @@ public class ProjectionMapsController : MonoBehaviour
             m_HitObject = hit.transform.gameObject;
             if (m_HitObject.TryGetComponent<ProjectionMap>(out ProjectionMap hitProjectionMap))
             {
-                hitProjectionMap.SetFocusedColor();
-                m_FocusedProjectionMap = hitProjectionMap;
-                m_PreviousFocusedProjectionMap = hitProjectionMap;
+                if (hitProjectionMap != m_ActiveProjectionMap)
+                {
+                    hitProjectionMap.SetFocusedColor();
+                    m_FocusedProjectionMap = hitProjectionMap;
+                    m_PreviousFocusedProjectionMap = hitProjectionMap;
+                }
             }
             else
             {
@@ -61,6 +64,10 @@ public class ProjectionMapsController : MonoBehaviour
     {
         if (m_FocusedProjectionMap != null && Mouse.current.leftButton.isPressed)
         {
+            if (m_ActiveProjectionMap != null)
+            {
+                m_ActiveProjectionMap.ShowCorners(false);
+            }
             m_ActiveProjectionMap = m_FocusedProjectionMap;
             m_ActiveProjectionMap.ShowCorners(true);
         }

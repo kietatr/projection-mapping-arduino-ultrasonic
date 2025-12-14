@@ -15,11 +15,14 @@ public class ProjectedImages : MonoBehaviour
 
     void Update()
     {
-        string arduinoData = m_ArduinoSerialConnector.ReadData();
-        if (arduinoData != null)
+        if (m_ArduinoSerialConnector != null)
         {
-            int data = int.Parse(arduinoData);
-            SetAlpha(data / m_MaxDistance);
+            string arduinoData = m_ArduinoSerialConnector.ReadData();
+            if (arduinoData != null)
+            {
+                int data = int.Parse(arduinoData);
+                SetAlpha(data / m_MaxDistance);
+            }
         }
     }
 
