@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 
 public class EditableCorner : MonoBehaviour
 {
-    [SerializeField] Color m_FocusColor = Color.white;
-    [SerializeField] Color m_ActiveColor = new(0.2f, 0.2f, 0.2f);
     [SerializeField] LayerMask m_RaycastPlane;
 
     public event Action<EditableCorner> OnFocus;
@@ -25,7 +23,7 @@ public class EditableCorner : MonoBehaviour
     {
         m_MeshRenderer = GetComponent<MeshRenderer>();
         m_OriginalColor = m_MeshRenderer.material.color;
-        
+
         m_Outline = GetComponent<Outline>();
         m_Outline.enabled = true;
         m_Outline.OutlineWidth = m_DefaultOutlineWidth;
@@ -111,13 +109,11 @@ public class EditableCorner : MonoBehaviour
 
     void Highlight()
     {
-        // m_MeshRenderer.material.color = m_FocusColor;
         m_Outline.OutlineWidth = m_HighlightedOutlineWidth;
     }
 
     void Unhighlight()
     {
-        // m_MeshRenderer.material.color = m_OriginalColor;
         m_Outline.OutlineWidth = m_DefaultOutlineWidth;
     }
 }

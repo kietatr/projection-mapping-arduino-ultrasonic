@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class ProjectionMap : MonoBehaviour
     [SerializeField] GameObject m_EditableCornerPrefab;
 
     public List<EditableCorner> EditableCorners {get; private set;}
+    public event Action<MeshFilter> OnMeshChange;
 
     MeshFilter m_MeshFilter;
     MeshRenderer m_MeshRenderer;
@@ -39,6 +41,7 @@ public class ProjectionMap : MonoBehaviour
         movedVertices[indexOfMovedCorner] = movedCorner.transform.localPosition;
         m_MeshFilter.mesh.vertices = movedVertices;
         m_MeshCollider.sharedMesh = m_MeshFilter.mesh;
+        OnMeshChange?.Invoke(m_MeshFilter);
     }
 
     public void ShowCorners(bool show)
