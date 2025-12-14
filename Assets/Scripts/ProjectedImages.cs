@@ -6,16 +6,18 @@ public class ProjectedImages : MonoBehaviour
     float m_MaxDistance = 200f;
     ArduinoSerialConnector m_ArduinoSerialConnector;
     MeshRenderer m_MeshRenderer;
+    ProjectionMapsController m_ProjectionMapsController;
 
     void Awake()
     {
         m_ArduinoSerialConnector = FindAnyObjectByType<ArduinoSerialConnector>();
         m_MeshRenderer = GetComponent<MeshRenderer>();
+        m_ProjectionMapsController = GetComponentInParent<ProjectionMapsController>();
     }
 
     void Update()
     {
-        if (m_ArduinoSerialConnector != null)
+        if (m_ArduinoSerialConnector != null && !m_ProjectionMapsController.PauseArduinoInputData)
         {
             string arduinoData = m_ArduinoSerialConnector.ReadData();
             if (arduinoData != null)

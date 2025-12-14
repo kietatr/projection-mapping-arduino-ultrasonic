@@ -51,7 +51,7 @@ public class ProjectionMap : MonoBehaviour
 
     public void SetColor(Color color)
     {
-        m_MeshRenderer.sharedMaterial.SetColor("_Color", color);
+        m_MeshRenderer.material.SetColor("_Color", color);
     }
 
     public void SetFocusedColor()

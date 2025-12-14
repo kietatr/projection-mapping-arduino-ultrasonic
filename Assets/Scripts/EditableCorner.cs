@@ -16,11 +16,19 @@ public class EditableCorner : MonoBehaviour
     MeshRenderer m_MeshRenderer;
     bool m_IsFocused;
     bool m_IsActive;
+    Outline m_Outline;
+    float m_DefaultOutlineWidth = 2;
+    float m_HighlightedOutlineWidth = 6;
+
 
     void Awake()
     {
         m_MeshRenderer = GetComponent<MeshRenderer>();
         m_OriginalColor = m_MeshRenderer.material.color;
+        
+        m_Outline = GetComponent<Outline>();
+        m_Outline.enabled = true;
+        m_Outline.OutlineWidth = m_DefaultOutlineWidth;
     }
 
     void Update()
@@ -45,20 +53,20 @@ public class EditableCorner : MonoBehaviour
             GameObject hitObject = hit.transform.gameObject;
             if (hitObject == gameObject)
             {
-                m_MeshRenderer.material.color = m_FocusColor;
+                Highlight();
                 m_IsFocused = true;
                 OnFocus?.Invoke(this);
             }
             else
             {
-                m_MeshRenderer.material.color = m_OriginalColor;
+                Unhighlight();
                 m_IsFocused = false;
                 OnUnfocus?.Invoke(this);
             }
         }
         else
         {
-            m_MeshRenderer.material.color = m_OriginalColor;
+            Unhighlight();
             m_IsFocused = false;
             OnUnfocus?.Invoke(this);
         }
@@ -84,7 +92,7 @@ public class EditableCorner : MonoBehaviour
 
         if (m_IsActive)
         {
-            m_MeshRenderer.material.color = m_ActiveColor;
+            Highlight();
         }
     }
 
@@ -99,5 +107,17 @@ public class EditableCorner : MonoBehaviour
                 OnMove?.Invoke(this);
             }
         }
+    }
+
+    void Highlight()
+    {
+        // m_MeshRenderer.material.color = m_FocusColor;
+        m_Outline.OutlineWidth = m_HighlightedOutlineWidth;
+    }
+
+    void Unhighlight()
+    {
+        // m_MeshRenderer.material.color = m_OriginalColor;
+        m_Outline.OutlineWidth = m_DefaultOutlineWidth;
     }
 }

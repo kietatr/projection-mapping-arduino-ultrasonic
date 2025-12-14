@@ -5,11 +5,18 @@ using UnityEngine.InputSystem;
 
 public class ProjectionMapsController : MonoBehaviour
 {
+    [SerializeField] LayerMask m_RaycastPlane;
+
+    public bool PauseArduinoInputData { get; private set; }
+
+    Key m_KeyToPauseArduino = Key.P;
+
     ProjectionMap m_FocusedProjectionMap;
     ProjectionMap m_PreviousFocusedProjectionMap;
     ProjectionMap m_ActiveProjectionMap;
     List<ProjectionMap> m_ProjectionMaps = new();
     GameObject m_HitObject;
+
 
 
     void Start()
@@ -21,6 +28,7 @@ public class ProjectionMapsController : MonoBehaviour
     {
         CheckFocus();
         CheckActive();
+        CheckPauseArduinoInputData();
     }
 
     void CheckFocus()
@@ -78,6 +86,15 @@ public class ProjectionMapsController : MonoBehaviour
                 m_ActiveProjectionMap.ShowCorners(false);
                 m_ActiveProjectionMap = null;
             }
+        }
+    }
+
+    void CheckPauseArduinoInputData()
+    {
+        if (Keyboard.current[m_KeyToPauseArduino].wasPressedThisFrame)
+        {
+            PauseArduinoInputData = !PauseArduinoInputData;
+            Debug.Log("Pause Arduino input data = " + PauseArduinoInputData);
         }
     }
 }
