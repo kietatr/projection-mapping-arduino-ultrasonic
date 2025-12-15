@@ -1075,7 +1075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a845aa5b10e40b284f07ce8a074fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SerialPortName: /dev/ttyACM0
+  m_SerialPortName: COM4
   m_BaudRate: 115200
 --- !u!4 &1887262605
 Transform:
@@ -1189,7 +1189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1835595590723247599, guid: e248645f81c359949a8446e4fca99c42, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2283234845687570337, guid: e248645f81c359949a8446e4fca99c42, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -1197,7 +1197,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 848c172c2f8974b71a276ab8696bb79e, type: 2}
     - target: {fileID: 8964741949066204615, guid: e248645f81c359949a8446e4fca99c42, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: -2.367
       objectReference: {fileID: 0}
     - target: {fileID: 8964741949066204615, guid: e248645f81c359949a8446e4fca99c42, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1365,6 +1365,10 @@ PrefabInstance:
     - target: {fileID: 7175482332311819803, guid: deaad856b7b665703a6dadbc0199740d, type: 3}
       propertyPath: m_Name
       value: Tiger L - Video
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175482332311819803, guid: deaad856b7b665703a6dadbc0199740d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8520360336227148492, guid: deaad856b7b665703a6dadbc0199740d, type: 3}
       propertyPath: m_RenderMode
