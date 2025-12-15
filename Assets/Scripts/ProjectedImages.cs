@@ -23,7 +23,8 @@ public class ProjectedImages : MonoBehaviour
             if (arduinoData != null)
             {
                 float data = float.Parse(arduinoData);
-                SetAlpha(data / m_MaxDistance);
+                float alphaToSet = MyMathUtils.Remap(data, 15f, 150f, 0f, 1f);
+                SetAlpha(alphaToSet);
             }
         }
     }
