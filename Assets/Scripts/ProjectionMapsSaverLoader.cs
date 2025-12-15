@@ -62,7 +62,11 @@ public class ProjectionMapsSaverLoader : MonoBehaviour
         foreach (SavedProjectionMap savedProjectionMap in savedProjectionScene.SavedProjectionMaps)
         {
             Transform projectionMap = transform.Find(savedProjectionMap.Name);
-            projectionMap.GetComponent<MeshFilter>().mesh.vertices = savedProjectionMap.Vertices;
+            if (projectionMap != null)
+            {
+                projectionMap.GetComponent<MeshFilter>().mesh.vertices = savedProjectionMap.Vertices;
+                projectionMap.GetComponent<MeshCollider>().sharedMesh = projectionMap.GetComponent<MeshFilter>().mesh;
+            }
         }
     }
 

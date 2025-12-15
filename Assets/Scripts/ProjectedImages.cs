@@ -22,7 +22,7 @@ public class ProjectedImages : MonoBehaviour
             string arduinoData = m_ArduinoSerialConnector.ReadData();
             if (arduinoData != null)
             {
-                int data = int.Parse(arduinoData);
+                float data = float.Parse(arduinoData);
                 SetAlpha(data / m_MaxDistance);
             }
         }
